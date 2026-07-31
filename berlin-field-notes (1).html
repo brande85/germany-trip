@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Dossier — Berlin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f2ecdf;
+    --paper-deep: #e9e1cf;
+    --ink: #221f1a;
+    --ink-soft: #4a453d;
+    --brass: #a9814a;
+    --brass-deep: #8c6a3a;
+    --stamp-red: #a83a2c;
+    --spree: #3c6270;
+    --gold: #c39a3f;
+    --line: rgba(34,31,26,0.16);
+    --shadow: rgba(34,31,26,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top left, rgba(169,129,74,0.06), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px 120px;}
+
+  .top-nav{
+    padding:18px 0 0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.06em;text-transform:uppercase;
+  }
+  .top-nav a{color:var(--brass-deep);text-decoration:none;border-bottom:1px solid var(--brass);}
+  .top-nav a:hover{color:var(--stamp-red);border-color:var(--stamp-red);}
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    padding:56px 0 40px;
+    border-bottom:2px solid var(--ink);
+    position:relative;
+  }
+  .eyebrow-row{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .eyebrow-row .tag{
+    border:1px solid var(--ink);
+    padding:3px 9px;
+    border-radius:2px;
+  }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(42px, 7vw, 72px);
+    line-height:0.98;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--stamp-red);
+  }
+  .subtitle{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:20px;
+    color:var(--ink-soft);
+    max-width:520px;
+  }
+  .stamp{
+    position:absolute;
+    top:44px; right:28px;
+    width:104px;height:104px;
+    border:2.5px solid var(--stamp-red);
+    border-radius:50%;
+    color:var(--stamp-red);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    transform:rotate(9deg);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;font-weight:600;letter-spacing:0.06em;
+    line-height:1.35;
+    opacity:0.85;
+    mix-blend-mode:multiply;
+  }
+  @media (max-width:640px){ .stamp{display:none;} }
+
+  /* ---------- intro / thesis ---------- */
+  .thesis{
+    padding:38px 0 10px;
+    font-size:19px;
+    max-width:680px;
+  }
+  .thesis strong{color:var(--stamp-red);font-weight:600;}
+  .drop{
+    font-family:'Fraunces',serif;
+    font-size:64px;
+    line-height:0.7;
+    float:left;
+    padding-right:10px;
+    padding-top:8px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  /* ---------- section chrome ---------- */
+  section{margin-top:64px;}
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;
+    margin-bottom:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:12px;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;color:var(--brass-deep);font-weight:600;
+    white-space:nowrap;
+  }
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:32px;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  h2 .sub{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  h3.sub-head{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:21px;
+    margin:32px 0 12px;
+    color:var(--ink);
+  }
+  p{margin:0 0 16px;font-size:16.5px;}
+  .lede{
+    font-family:'Fraunces',serif;
+    font-style:normal;
+    font-weight:500;
+    font-size:21px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    max-width:640px;
+  }
+
+  /* margin note / field note aside */
+  .field-note{
+    background:var(--paper-deep);
+    border-left:3px solid var(--brass);
+    padding:16px 20px;
+    margin:22px 0;
+    font-size:15px;
+    border-radius:0 4px 4px 0;
+    position:relative;
+  }
+  .field-note .fn-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;font-weight:600;
+    letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--brass-deep);
+    display:block;margin-bottom:6px;
+  }
+
+  .flag{
+    background:#efe0d8;
+    border:1px dashed var(--stamp-red);
+    padding:16px 20px;
+    margin:22px 0;
+    font-size:15px;
+    border-radius:4px;
+  }
+  .flag .fn-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;font-weight:700;
+    letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--stamp-red);
+    display:block;margin-bottom:6px;
+  }
+
+  /* ---------- timeline ---------- */
+  .timeline{
+    position:relative;
+    margin-left:8px;
+    padding-left:28px;
+    border-left:2px solid var(--line);
+  }
+  .t-item{
+    position:relative;
+    padding-bottom:22px;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:'';
+    position:absolute;
+    left:-33.5px; top:5px;
+    width:9px;height:9px;
+    background:var(--paper);
+    border:2px solid var(--brass-deep);
+    border-radius:50%;
+  }
+  .t-year{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--stamp-red);
+    margin-bottom:2px;
+  }
+  .t-text{font-size:15px;color:var(--ink);}
+  .era-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--spree);
+    margin:26px 0 10px;
+  }
+  .timeline + .era-label{margin-top:8px;}
+
+  /* ---------- wall divider (signature element) ---------- */
+  .wall-split{
+    display:grid;
+    grid-template-columns:1fr 40px 1fr;
+    gap:0;
+    margin:28px 0;
+    align-items:stretch;
+  }
+  .wall-side{
+    padding:20px 22px;
+    font-size:15px;
+  }
+  .wall-side.east{background:#e7dcc6;border-radius:6px 0 0 6px;}
+  .wall-side.west{background:#dde8e9;border-radius:0 6px 6px 0;}
+  .wall-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+    margin-bottom:8px;display:block;
+  }
+  .wall-side.east .wall-label{color:var(--stamp-red);}
+  .wall-side.west .wall-label{color:var(--spree);}
+  .crack{
+    position:relative;
+    background:
+      repeating-linear-gradient(
+        115deg, var(--ink) 0 3px, transparent 3px 14px
+      );
+    clip-path: polygon(48% 0, 58% 8%, 44% 18%, 60% 30%, 42% 42%, 56% 54%, 40% 66%, 58% 78%, 46% 90%, 52% 100%, 0 100%, 0 0);
+    background-color:var(--ink);
+  }
+  @media (max-width:640px){
+    .wall-split{grid-template-columns:1fr;}
+    .crack{display:none;}
+    .wall-side.east{border-radius:6px 6px 0 0;}
+    .wall-side.west{border-radius:0 0 6px 6px;}
+  }
+
+  /* ---------- stat row ---------- */
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin:24px 0;
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .stat{
+    background:var(--paper);
+    padding:16px 14px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:26px;
+    color:var(--brass-deep);
+    display:block;
+  }
+  .stat .lbl{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  @media (max-width:640px){ .stat-row{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- ampelmann icon ---------- */
+  .amp-block{
+    display:flex;gap:20px;align-items:center;
+    background:var(--paper-deep);
+    border-radius:8px;
+    padding:20px;
+    margin:22px 0;
+  }
+  .amp-icon{width:56px;height:72px;flex-shrink:0;position:relative;}
+  .amp-icon .hat{width:40px;height:14px;background:var(--stamp-red);border-radius:3px 3px 0 0;position:absolute;top:0;left:8px;}
+  .amp-icon .head{width:26px;height:22px;background:var(--stamp-red);border-radius:50%;position:absolute;top:10px;left:15px;}
+  .amp-icon .body{width:34px;height:30px;background:var(--stamp-red);border-radius:8px 8px 4px 4px;position:absolute;top:30px;left:11px;}
+  .amp-icon .legL{width:10px;height:20px;background:var(--stamp-red);position:absolute;top:56px;left:14px;border-radius:0 0 3px 3px;}
+  .amp-icon .legR{width:10px;height:20px;background:var(--stamp-red);position:absolute;top:56px;left:32px;border-radius:0 0 3px 3px;}
+  .amp-copy{font-size:15px;}
+  .amp-copy .amp-name{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--stamp-red);display:block;margin-bottom:6px;}
+
+  /* ---------- line-art illustrations ---------- */
+  .line-art{
+    display:flex;justify-content:center;margin:26px 0;
+  }
+  .line-art svg{max-width:280px;width:100%;height:auto;}
+  .line-art.small svg{max-width:160px;}
+
+  /* ---------- museum grid ---------- */
+  .museum-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0;
+  }
+  @media (max-width:760px){ .museum-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .museum-grid{grid-template-columns:1fr;} }
+  .m-card{
+    background:var(--paper-deep);
+    border-radius:8px;padding:18px 20px;
+  }
+  .m-card .m-name{font-family:'Fraunces',serif;font-weight:600;font-size:18px;margin-bottom:6px;}
+  .m-card .m-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--brass-deep);display:block;margin-bottom:8px;}
+
+  /* ---------- closing ---------- */
+  .closing{
+    margin-top:76px;
+    padding:36px 32px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:10px;
+  }
+  .closing h3{
+    font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:0 0 14px;color:#f3ede0;
+  }
+  .closing p{color:#d9d2c1;font-size:16px;}
+  .closing .next{
+    margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.18);
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.06em;
+    color:var(--gold);text-transform:uppercase;
+  }
+
+  footer{
+    margin-top:40px;text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;color:var(--ink-soft);letter-spacing:0.05em;
+  }
+
+  ::selection{background:var(--gold);color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top-nav"><a href="index.html">← All Chapters</a></div>
+
+  <header class="masthead">
+    <div class="eyebrow-row">
+      <span>Field Dossier · Germany, Oct 2026</span>
+      <span class="tag">Chapter 01 of 06</span>
+    </div>
+    <h1 class="title">Berlin: <em>a city that<br>survived itself<br>five times over</em></h1>
+    <p class="subtitle">Everything worth knowing before you land — how one marsh town on the Spree became a Prussian capital, then a divided battleground, then whole again.</p>
+    <div class="stamp">BERLIN<br>ARR. OCT<br>2026</div>
+  </header>
+
+  <div class="thesis">
+    <p><span class="drop">B</span>erlin is nearly 800 years old, but almost nothing you'll actually see there is more than 130. That's the thing to hold onto walking around: this is one of the oldest cities in Germany and also one of the newest-looking, because it kept getting knocked down, split in half, and rebuilt — and unlike most cities, Berlin usually chose to leave the damage visible instead of hiding it. Every landmark below survived a different version of that same story.</p>
+  </div>
+
+  <!-- ============ TIMELINE ============ -->
+  <section id="timeline">
+    <div class="sec-head">
+      <span class="sec-num">§1</span>
+      <h2>The timeline<span class="sub">~800 years, compressed to the parts that matter</span></h2>
+    </div>
+    <p class="lede">One thread to hold onto: Berlin was a market town for almost 500 years before it was ever a capital of anything. Everything below it is what happened once it started climbing the ranks.</p>
+
+    <p class="era-label">Medieval town → regional capital</p>
+    <div class="timeline">
+      <div class="t-item"><div class="t-year">1237</div><div class="t-text"><strong>Berlin is founded</strong> — first documented as twin trading settlements, Berlin and Cölln, facing each other across the Spree River. They merge into one town by 1307.</div></div>
+      <div class="t-item"><div class="t-year">1486</div><div class="t-text">Berlin becomes the official residence of the Brandenburg electors — a regional capital, still four centuries away from national importance.</div></div>
+    </div>
+
+    <p class="era-label">Prussian & Imperial capital</p>
+    <div class="timeline">
+      <div class="t-item"><div class="t-year">1701</div><div class="t-text">Berlin is promoted again: capital of the brand-new <strong>Kingdom of Prussia</strong>.</div></div>
+      <div class="t-item"><div class="t-year">1788–91</div><div class="t-text">The Brandenburg Gate is built, modeled on the entrance gate to the Acropolis in Athens.</div></div>
+      <div class="t-item"><div class="t-year">1806 → 1814</div><div class="t-text">Napoleon takes the Gate's crowning statue to Paris as a war trophy; Prussia reclaims it eight years later. <em>(Full story in §2.)</em></div></div>
+      <div class="t-item"><div class="t-year">1871</div><div class="t-text">Berlin becomes capital of the newly unified <strong>German Empire</strong> — its biggest promotion yet.</div></div>
+    </div>
+
+    <p class="era-label">Nazi era, war, and division</p>
+    <div class="timeline">
+      <div class="t-item"><div class="t-year">1933</div><div class="t-text">A fire at the Reichstag, weeks after Hitler's appointment as chancellor, becomes the pretext for seizing dictatorial power.</div></div>
+      <div class="t-item"><div class="t-year">1945</div><div class="t-text">WWII ends. The Allies split Berlin into four occupation zones — American, British, French, Soviet.</div></div>
+      <div class="t-item"><div class="t-year">1949</div><div class="t-text">Germany formally splits into West and East. Berlin, sitting entirely inside East German territory, splits along with it.</div></div>
+      <div class="t-item"><div class="t-year">Aug 13, 1961</div><div class="t-text">East Germany seals the border overnight with the Berlin Wall — Berliners wake up to a divided city that didn't exist the day before. <em>(More in §3.)</em></div></div>
+      <div class="t-item"><div class="t-year">1963</div><div class="t-text">A traffic psychologist in East Berlin invents the Ampelmann, a hatted little pedestrian icon that will outlive the country that made him. <em>(More in §8.)</em></div></div>
+    </div>
+
+    <p class="era-label">Fall of the Wall & reunified Berlin</p>
+    <div class="timeline">
+      <div class="t-item"><div class="t-year">1987</div><div class="t-text">Standing right at the Brandenburg Gate, President Reagan challenges the Soviet leader directly: <em>"Mr. Gorbachev, tear down this wall!"</em> <em>(More in §2.)</em></div></div>
+      <div class="t-item"><div class="t-year">Nov 9, 1989</div><div class="t-text">A fumbled press-conference answer sends crowds to the checkpoints, and the Wall falls that night. <em>(Full story in §3.)</em></div></div>
+      <div class="t-item"><div class="t-year">1990</div><div class="t-text">Germany reunifies. The Brandenburg Gate — off-limits behind the Wall for 28 years — becomes the backdrop for it.</div></div>
+      <div class="t-item"><div class="t-year">1999</div><div class="t-text">A new glass dome opens atop the rebuilt Reichstag, and parliament moves back to Berlin from Bonn. <em>(More in §4.)</em></div></div>
+    </div>
+  </section>
+
+  <!-- ============ BRANDENBURG GATE ============ -->
+  <section id="gate">
+    <div class="sec-head">
+      <span class="sec-num">§2</span>
+      <h2>The Brandenburg Gate<span class="sub">A doorway that keeps changing countries</span></h2>
+    </div>
+    <p class="lede">Picture a building that has, without moving an inch, been: a peacetime city gate, a war trophy display case, a Nazi backdrop, an off-limits landmark stuck behind a militarized border, and finally the single most photographed symbol of a country putting itself back together. Same stones. Five completely different jobs.</p>
+    <div class="line-art">
+      <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="140" x2="240" y2="140" stroke="#221f1a" stroke-width="2"/>
+        <rect x="30" y="30" width="200" height="14" fill="none" stroke="#221f1a" stroke-width="2"/>
+        <g stroke="#221f1a" stroke-width="2.5">
+          <line x1="45" y1="44" x2="45" y2="140"/>
+          <line x1="78" y1="44" x2="78" y2="140"/>
+          <line x1="111" y1="44" x2="111" y2="140"/>
+          <line x1="149" y1="44" x2="149" y2="140"/>
+          <line x1="182" y1="44" x2="182" y2="140"/>
+          <line x1="215" y1="44" x2="215" y2="140"/>
+        </g>
+        <path d="M110 18 L120 6 L130 14 L140 6 L150 18 Z" fill="none" stroke="#a83a2c" stroke-width="1.8"/>
+        <circle cx="130" cy="12" r="2" fill="#a83a2c"/>
+      </svg>
+    </div>
+    <p>It was built between 1788 and 1791 for King Frederick William II, designed after the grand gateway of the Acropolis in Athens — which means Berlin's most iconic monument is, structurally, a 235-year-old Greek cosplay. Two years after it was finished, sculptor Johann Gottfried Schadow crowned it with the <strong>Quadriga</strong>: Victoria, the Roman goddess of victory, driving a four-horse chariot.</p>
+    <div class="field-note">
+      <span class="fn-label">Field note</span>
+      In 1806 Napoleon marched his army straight through the Gate after crushing Prussia, then had the Quadriga dismantled and shipped to Paris as a trophy. Eight years later Prussia beat him and took it back — and added an Iron Cross to the statue, a Prussian military medal (shaped, appropriately, like a cross) mounted on Victoria's staff as a permanent reminder of who won.
+    </div>
+    <p>During the Cold War, the Gate sat inside the death strip itself, boxed in by both walls of the border system (see §3) — visible but off-limits to everyone for almost thirty years. In 1987, President Reagan stood on the western side, in view of the Gate, and called out the Soviet leader by name: <em>"Mr. Gorbachev, tear down this wall!"</em> Two years later, when the Wall actually fell on Nov 9, 1989, people gathered here and climbed up onto the wall barrier right in front of it — the famous photo of people sitting on the concrete with the Gate behind them. The Gate itself wasn't reopened for people to walk through until December 22, 1989.</p>
+  </section>
+
+  <!-- ============ BERLIN WALL ============ -->
+  <section id="wall">
+    <div class="sec-head">
+      <span class="sec-num">§3</span>
+      <h2>The Wall<span class="sub">Twenty-eight years, two months, twenty-seven days</span></h2>
+    </div>
+    <p class="lede">It wasn't really one wall. It was two walls, roughly 100 meters apart, with a raked-gravel "death strip" of trip-wires, guard dogs, and floodlights running between them — an entire engineered landscape built to make crossing 30–60 meters of open ground nearly impossible.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">28 yrs</span><span class="lbl">Aug 1961 – Nov 1989</span></div>
+      <div class="stat"><span class="num">~27 mi</span><span class="lbl">enclosing West Berlin</span></div>
+      <div class="stat"><span class="num">300+</span><span class="lbl">guard towers</span></div>
+      <div class="stat"><span class="num">5,000+</span><span class="lbl">who escaped anyway</span></div>
+    </div>
+    <p>People got out by tunneling under it, flying over it in homemade hot-air balloons, swimming canals, and once by simply ramming a stolen truck through a weak point at speed. Over 5,000 people made it across by one improvised method or another before the Wall came down.</p>
+    <div class="wall-split">
+      <div class="wall-side east">
+        <span class="wall-label">How it went up</span>
+        Built overnight on Aug 12–13, 1961, in a secretly planned operation codenamed "Rose." It started as barbed wire and got upgraded through four design phases over the next 14 years, ending in the smooth, white, rounded-top "Border Wall 75" — engineered specifically so climbing hands couldn't get a grip.
+      </div>
+      <div class="crack"></div>
+      <div class="wall-side west">
+        <span class="wall-label">How it came down</span>
+        On Nov 9, 1989, an East German spokesman fumbled a question about new travel rules and implied they took effect immediately. Crowds flooded the checkpoints. With no orders and a swelling crowd, a border guard named Harald Jäger made the call himself and raised the barrier.
+      </div>
+    </div>
+    <h3 class="sub-head">What's actually left to see</h3>
+    <p>Almost none of the physical Wall is still standing — most of it was dismantled or chipped apart by souvenir-hunters within a year or two of 1989. What you'll actually walk along are a handful of preserved stretches, each showing a different side of it:</p>
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Mühlenstraße, Friedrichshain</span>
+        <div class="m-name">East Side Gallery</div>
+        The longest surviving stretch — 1.3km along the Spree, painted by 118 artists from 21 countries right after the Wall fell in 1990. This is the colorful, photogenic side, including the famous mural of Brezhnev and Honecker kissing.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Bernauer Straße, Mitte</span>
+        <div class="m-name">Berlin Wall Memorial</div>
+        The sober version: a 1.4km stretch that preserves an actual section of the death strip, a watchtower, and the patrol road, with a documentation center. Free to enter, and the best place to understand how the border actually worked.
+      </div>
+    </div>
+    <div class="field-note">
+      <span class="fn-label">One to manage expectations on</span>
+      Checkpoint Charlie — the famous guard-hut crossing point — is worth a stop for the history, but the hut and signage there today are a modern reconstruction, not the original. Bernauer Straße is the spot for authentic, untouched remains.
+    </div>
+  </section>
+
+  <!-- ============ REICHSTAG ============ -->
+  <section id="reichstag">
+    <div class="sec-head">
+      <span class="sec-num">§4</span>
+      <h2>The Reichstag Dome<span class="sub">Architecture as a promise</span></h2>
+    </div>
+    <p class="lede">The original 1894 parliament building survived a suspicious 1933 fire that Hitler used as an excuse for emergency powers, then WWII bombing, then decades sitting half-ruined right on the Cold War frontier. When Germany reunified, they didn't tear it down — they gave it a glass hat.</p>
+    <div class="line-art">
+      <svg viewBox="0 0 260 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="130" cy="150" rx="80" ry="14" fill="none" stroke="#a9814a" stroke-width="1.5" opacity="0.4"/>
+        <path d="M60 150 Q60 60 130 40 Q200 60 200 150" stroke="#221f1a" stroke-width="2" fill="none"/>
+        <path d="M130 40 C 90 70, 175 90, 90 120 C 160 140, 105 150, 130 150" stroke="#3c6270" stroke-width="1.6" fill="none"/>
+        <circle cx="130" cy="40" r="4" fill="#a83a2c"/>
+        <line x1="60" y1="150" x2="200" y2="150" stroke="#221f1a" stroke-width="2"/>
+        <text x="130" y="175" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4a453d" letter-spacing="0.5">SPIRAL WALKWAY → OBSERVATION DECK</text>
+      </svg>
+    </div>
+    <p>In 1992, British architect Norman Foster won the competition to rebuild it, adding a 360° glass dome with a double-helix ramp winding up to an observation deck. Look down through the center and you can see straight into the debating chamber below — the whole point being that ordinary visitors can literally stand above their own government and watch it work. It opened in 1999, the same year parliament moved back to Berlin from Bonn.</p>
+  </section>
+
+  <!-- ============ TV TOWER ============ -->
+  <section id="tv-tower">
+    <div class="sec-head">
+      <span class="sec-num">§5</span>
+      <h2>The TV Tower<span class="sub">Communist propaganda that backfired on sunny days</span></h2>
+    </div>
+    <p class="lede">At 368 meters, the Fernsehturm is the tallest structure in Germany, and it's visible from almost anywhere in the city — including a clear view from right around your hotel.</p>
+    <div class="line-art small">
+      <svg viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="80" y1="10" x2="80" y2="200" stroke="#221f1a" stroke-width="2.5"/>
+        <path d="M65 200 L95 200 L88 130 L72 130 Z" fill="none" stroke="#221f1a" stroke-width="2"/>
+        <line x1="20" y1="200" x2="140" y2="200" stroke="#221f1a" stroke-width="2"/>
+        <circle cx="80" cy="95" r="34" fill="none" stroke="#221f1a" stroke-width="2.5"/>
+        <line x1="80" y1="10" x2="80" y2="61" stroke="#221f1a" stroke-width="2.5"/>
+        <line x1="80" y1="61" x2="80" y2="129" stroke="#a83a2c" stroke-width="2" opacity="0.85"/>
+        <line x1="46" y1="95" x2="114" y2="95" stroke="#a83a2c" stroke-width="2" opacity="0.85"/>
+        <circle cx="80" cy="10" r="3" fill="#a83a2c"/>
+      </svg>
+    </div>
+    <p>East Germany built it between 1965 and 1969 to mark the GDR's 20th anniversary and to make a point: socialism could build higher than the West. It's a deliberately space-age design — a steel needle topped with a sphere, styled after the Sputnik era — and for a while it was the second-tallest freestanding structure on Earth, beaten only by Moscow's TV tower.</p>
+    <div class="field-note">
+      <span class="fn-label">The one flaw nobody planned for</span>
+      When sunlight hits the steel sphere at the top, it reflects in the unmistakable shape of a cross — visible across the sky over what was then a strictly atheist East Berlin. Officials tried repainting and re-coating the sphere for years; nothing worked. West Berliners nicknamed it <em>die Rache des Papstes</em> — "the Pope's Revenge." Reagan even mentioned it by name in that same 1987 speech from §2, calling out the tower as proof that some things can't be painted over.
+    </div>
+    <p>Today the sphere houses an observation deck and a slowly-revolving restaurant, both open to the public, at Alexanderplatz — a short walk from the Circus Hotel.</p>
+  </section>
+
+  <!-- ============ MUSEUM ISLAND ============ -->
+  <section id="museum-island">
+    <div class="sec-head">
+      <span class="sec-num">§6</span>
+      <h2>Museum Island<span class="sub">A UNESCO site the size of a neighborhood</span></h2>
+    </div>
+    <p class="lede">Five museums on one small island in the Spree, built by four different architects over exactly one century — and every single one of them was commissioned by a Prussian king.</p>
+    <p>It started in 1830 with one building: the Altes Museum, designed by Karl Friedrich Schinkel for King Friedrich Wilhelm III, built specifically to put the royal art collection in front of the public for the first time. His son, Friedrich Wilhelm IV, had the bigger idea — a "sanctuary for art and science" spanning the whole northern tip of the island. It took nearly a century to actually finish: Neues Museum in 1855, Alte Nationalgalerie in 1876, Bode Museum in 1904, and the Pergamon Museum, the last of the five, only in 1930.</p>
+    <p>Then came WWII. Allied bombing gutted several of the buildings — the Neues Museum in particular sat as a roofless ruin for over 60 years. When it was finally restored in 2009, the architect deliberately left the bomb damage visible in the brickwork instead of smoothing it over, the same instinct you'll see all over Berlin. The whole ensemble got UNESCO World Heritage status in 1999.</p>
+
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Altes Museum · 1830</span>
+        <div class="m-name">The original</div>
+        Schinkel's neoclassical rotunda, modeled on the Pantheon, was the first building on the island. Greek, Roman, and Etruscan antiquities.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Neues Museum · 1855</span>
+        <div class="m-name">The Nefertiti Bust</div>
+        A roughly 3,000-year-old sculpture of the Egyptian queen, one of the most famous depictions of a woman in existence. Also houses the prehistory collection.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Alte Nationalgalerie · 1876</span>
+        <div class="m-name">19th-century art</div>
+        Built like a Greek temple on a pedestal. Caspar David Friedrich, Monet, Renoir, and a cast of Rodin's <em>The Thinker</em>.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Bode Museum · 1904</span>
+        <div class="m-name">Sculpture & coins</div>
+        Sits at the island's northern tip like a palace on the water. Medieval-to-Baroque sculpture, Byzantine art, and a major coin collection.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Pergamon Museum · 1930</span>
+        <div class="m-name">The Pergamon Altar</div>
+        A monumental 2nd-century-BC Hellenistic altar with a 113-meter carved frieze of gods battling giants, plus the reconstructed Ishtar Gate of Babylon — normally the island's biggest draw.
+      </div>
+    </div>
+
+    <div class="flag">
+      <span class="fn-label">Before you plan around it</span>
+      Heads up: the Pergamon Museum has been largely closed for a major renovation since October 2023, and as of your October 2026 trip it's still expected to be mostly shut — a partial reopening of its north wing isn't slated until mid-2027. The other four museums, including the Nefertiti bust, are unaffected and open. Worth double-checking current status closer to departure before counting on seeing the Pergamon Altar in person.
+    </div>
+  </section>
+
+  <!-- ============ NEIGHBORHOODS ============ -->
+  <section id="neighborhoods">
+    <div class="sec-head">
+      <span class="sec-num">§7</span>
+      <h2>Getting your bearings<span class="sub">Berlin doesn't really have one center</span></h2>
+    </div>
+    <p class="lede">Berlin isn't one city with neighborhoods radiating out from a middle — it's more like a cluster of small towns that got stitched together. Locals call their own patch a <em>Kiez</em>, usually just a few streets around one main square, and each one has its own personality.</p>
+
+    <div class="field-note">
+      <span class="fn-label">Right outside your door</span>
+      The Circus Hotel sits on Rosenthaler Platz, right on the seam between Mitte and Prenzlauer Berg, in the middle of the <strong>Scheunenviertel</strong> — Berlin's old Jewish quarter, now full of independent galleries, boutiques, and bars around narrow cobblestone streets. Hackescher Markt is a five-minute walk; Museum Island, Unter den Linden, and Alexanderplatz are all easy walking distance. The U8 stops directly across the street.
+    </div>
+
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Mitte</span>
+        <div class="m-name">The historic center</div>
+        Where most of this chapter's landmarks live — Museum Island, the Gate, the Reichstag. Gentrified and tourist-heavy, but the history is genuinely here.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Prenzlauer Berg</span>
+        <div class="m-name">Leafy & café-lined</div>
+        Former East Berlin, now Berlin's most "finished" gentrification story — tree-lined streets, a Saturday market at Kollwitzplatz, and the Sunday flea market at Mauerpark.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Kreuzberg</span>
+        <div class="m-name">Turkish, punk, political</div>
+        Former West Berlin, home to a large Turkish community and decades of squatter and alternative history. Covered in street art; Berlin's döner heartland.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Friedrichshain</span>
+        <div class="m-name">Rougher, cheaper, arty</div>
+        Next door to Kreuzberg and East Side Gallery. Dive bars, record shops, and Karl-Marx-Allee, a genuinely striking stretch of Socialist-era architecture.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Charlottenburg</span>
+        <div class="m-name">Old West Berlin</div>
+        The former center of West Berlin — grander, quieter, more upscale. Home to KaDeWe department store and Charlottenburg Palace.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOD & SOUVENIRS ============ -->
+  <section id="food-souvenirs">
+    <div class="sec-head">
+      <span class="sec-num">§8</span>
+      <h2>Food, drink & souvenirs<span class="sub">What to actually look for</span></h2>
+    </div>
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Invented 1949</span>
+        <div class="m-name">Currywurst</div>
+        Sliced fried pork sausage doused in curry ketchup. Berlin's signature street food, invented by Herta Heuwer in Charlottenburg, who traded liquor to British soldiers for curry powder to make the sauce.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Invented ~1972</span>
+        <div class="m-name">Döner Kebab</div>
+        Turkish grilled meat, but the sandwich-in-flatbread format is a Berlin invention, credited to Turkish guest workers near the old Zoo Station. Berlin now has more kebab shops than Istanbul.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Bakery staple</span>
+        <div class="m-name">Pfannkuchen</div>
+        A jam-filled doughnut — what the rest of Germany calls a "Berliner." Order it as "Pfannkuchen" here, or you'll get a confused look; locals don't call it a Berliner in Berlin.
+      </div>
+    </div>
+    <div class="field-note">
+      <span class="fn-label">The JFK trivia everyone brings up</span>
+      There's a popular myth that Kennedy's 1963 "Ich bin ein Berliner" speech accidentally called himself a jelly doughnut. It didn't — the grammar is correct and Berliners understood him fine — but the joke is baked into local trivia culture regardless, and someone will bring it up.
+    </div>
+    <p class="lede">Souvenirs worth looking for</p>
+    <div class="amp-block">
+      <div class="amp-icon">
+        <div class="hat"></div>
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legL"></div>
+        <div class="legR"></div>
+      </div>
+      <div class="amp-copy">
+        <span class="amp-name">The Ampelmann · b. 1961</span>
+        The little hatted man on East Berlin's crosswalk signals wasn't just cute mascot design — a traffic psychologist made him deliberately "fat and cute" so kids and people with low vision could read him instantly. After reunification, officials tried quietly swapping him for the standard West German signal man; East Berliners revolted, a 1995 "Save the Traffic Light Man" campaign saved him, and he's now one of the only pieces of East German culture that got <em>promoted</em> after the Wall fell instead of erased. Today he's on keychains, lamps, magnets, and every souvenir shelf in the city.
+      </div>
+    </div>
+    <p>Beyond the Ampelmann: a <strong>Berliner Bär</strong> figurine — the bear is Berlin's official heraldic symbol and shows up on flags, manhole covers, and souvenir shelves everywhere. GDR-era "Ostalgie" kitsch — Trabant models, old postcards, retro tins — is easy to find in Mitte and Prenzlauer Berg flea markets. And skip the "authentic" Wall fragments sold in tourist stalls near Checkpoint Charlie — most aren't verified, and the real thing is free to see at Bernauer Straße.</p>
+  </section>
+
+  <!-- ============ PRACTICAL NOTES ============ -->
+  <section id="practical-notes">
+    <div class="sec-head">
+      <span class="sec-num">§9</span>
+      <h2>Practical notes<span class="sub">The stuff that trips people up</span></h2>
+    </div>
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Money</span>
+        <div class="m-name">Carry both cash and card</div>
+        Germany is still a surprisingly cash-heavy country — many small cafés, markets, and shops are cash-only. But BVG buses have gone fully cashless, so a contactless card matters just as much.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Transit</span>
+        <div class="m-name">Validate before you board</div>
+        One ticket covers U-Bahn, S-Bahn, tram, bus, and ferry. There are no gates, but plainclothes inspectors check randomly — an unvalidated paper ticket (stamped at the yellow/red machines on the platform) is a flat €60 fine, no exceptions. App tickets validate automatically.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Shopping</span>
+        <div class="m-name">Sundays are dead</div>
+        German federal law keeps almost all shops and supermarkets closed on Sundays. Restaurants, bakeries, and museums stay open — plan any grocery or souvenir shopping around Saturday.
+      </div>
+    </div>
+    <div class="field-note">
+      <span class="fn-label">Weather for your dates</span>
+      You're in Berlin Oct 17–20 (Days 1–4). Highs in that window average 10–14°C (50–57°F), lows near 5–7°C (41–45°F), with rain likely on several days and only about 4–5 hours of daylight sun — pack layers.
+    </div>
+    <div class="field-note">
+      <span class="fn-label">Lucky timing</span>
+      Berlin's Festival of Lights runs Oct 9–18 this year, projecting illuminated art onto the Brandenburg Gate, the TV Tower, Berlin Cathedral, and the Victory Column each night through 11pm. Your first two nights in the city, Oct 17 and 18, land right on the festival's final two evenings.
+    </div>
+  </section>
+
+  <!-- ============ MORE TO EXPLORE ============ -->
+  <section id="more-to-explore">
+    <div class="sec-head">
+      <span class="sec-num">§10</span>
+      <h2>Beyond the shortlist<span class="sub">If you have extra time</span></h2>
+    </div>
+    <p>Everything above is the "have to see it" list. Here's what's next in line, roughly in order of how central they are:</p>
+    <div class="museum-grid">
+      <div class="m-card">
+        <span class="m-tag">Mitte · Free</span>
+        <div class="m-name">Holocaust Memorial</div>
+        A field of 2,711 unmarked concrete slabs of varying height near the Brandenburg Gate. The uneven ground underfoot is deliberate. The underground information center is also free.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Mitte</span>
+        <div class="m-name">Gendarmenmarkt</div>
+        Widely considered Berlin's most beautiful square — twin domed cathedrals facing each other across a plaza, with the Konzerthaus between them.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Tiergarten</span>
+        <div class="m-name">Tiergarten & Victory Column</div>
+        Berlin's huge central park (bigger than Central Park), with the golden Victory Column at its heart — climb it for one of the best views in the city.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Prenzlauer Berg · Sun only</span>
+        <div class="m-name">Mauerpark</div>
+        A former death-strip section turned park. Sunday brings a huge flea market, food stalls, and famously chaotic outdoor karaoke in the old amphitheater.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Tempelhof · Free</span>
+        <div class="m-name">Tempelhofer Feld</div>
+        A decommissioned 1920s airport — the site of the 1948 Berlin Airlift — now a vast open park where locals cycle, kite-fly, and picnic on the old runways.
+      </div>
+      <div class="m-card">
+        <span class="m-tag">Mitte</span>
+        <div class="m-name">DDR Museum</div>
+        A hands-on museum recreating everyday life in East Germany — you can sit in a real Trabant and walk through a reconstructed GDR apartment.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <div class="closing">
+    <h3>The pattern, if you're looking for one</h3>
+    <p>A gate that's stood through five completely different Germanys without moving an inch. A wall that took 28 years and a fortune in concrete to build, and came down in a single confused evening. A cartoon traffic signal that outlasted the country that invented him. A parliament that rebuilt itself with a glass roof specifically so its own citizens could look down and watch it work. Berlin doesn't hide what happened to it — it's basically the whole point of visiting.</p>
+    <div class="next">Next chapter → Oberwesel: castles, the Rhine, and the myths that inspired the opera you're seeing in Munich</div>
+  </div>
+
+  <div class="top-nav" style="margin-top:24px;padding-top:0;"><a href="index.html">← Back to All Chapters</a></div>
+
+  <footer>Field Dossier · Germany 2026 · Chapter 01 of 06</footer>
+
+</div>
+</body>
+</html>
